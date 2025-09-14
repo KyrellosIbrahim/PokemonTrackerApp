@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">Pokemon Tracker app</string>
+    <string name="header">Pokemon Tracker</string>
+    <string name="subheader">Register new catch</string>
+    <string name="height">Height</string>
+    <string name="gender">Gender</string>
+    <string name="national_number">National Number</string>
+    <string name="name">Name</string>
+    <string name="species">Species</string>
+    <string name="weight">Weight</string>
+    <string name="level">Level</string>
+    <string name="base_stats">Base Stats</string>
+    <string name="hp">HP</string>
+    <string name="attack">Attack</string>
+    <string name="defense">Defense</string>
+    <string name="radioMale">Male</string>
+    <string name="radioFemale">Female</string>
+    <string name="radioUnknown">Unknown</string>
+    <string name="reset">Reset</string>
+    <string name="save">Save</string>
 </resources>
