@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <TableLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="1"
+        android:padding="32dp"
+        android:shrinkColumns="0">
+
+        <!-- Header Section -->
+        <TableRow android:layout_marginBottom="8dp">
+            <TextView
+                android:id="@+id/tvHeader"
+                android:layout_span="2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/header"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:gravity="center" />
+        </TableRow>
+
+        <TableRow android:layout_marginBottom="32dp">
+            <TextView
+                android:id="@+id/tvSubheader"
+                android:layout_span="2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/subheader"
+                android:textSize="16sp"
+                android:gravity="center" />
+        </TableRow>
+
+        <!-- National Number -->
+        <TableRow android:layout_marginBottom="12dp">
+            <TextView
+                android:id="@+id/tvNationalNumber"
+                android:text="@string/national_number"
+                android:layout_width="0dp"
+                android:layout_weight="0.4"
+                android:paddingEnd="16dp"
+                android:gravity="center_vertical" />
+            <EditText
+                android:id="@+id/evNationalNumber"
+                android:layout_width="0dp"
+                android:layout_weight="0.6"
+                android:inputType="number"
+                android:text="@string/_896" />
+        </TableRow>
+
+        <!-- Name -->
+        <TableRow android:layout_marginBottom="12dp">
+            <TextView
+                android:id="@+id/tvName"
+                android:text="@string/name"
+                android:layout_width="0dp"
+                android:layout_weight="0.4"
+                android:paddingEnd="16dp"
+                android:gravity="center_vertical" />
+            <EditText
+                android:id="@+id/evName"
+                android:layout_width="0dp"
+                android:layout_weight="0.6"
+                android:inputType="textPersonName"
+                android:text="@string/glastrier" />
+        </TableRow>
+
+        <!-- Species -->
+        <TableRow android:layout_marginBottom="12dp">
+            <TextView
+                android:id="@+id/tvSpecies"
+                android:text="@string/species"
+                android:layout_width="0dp"
+                android:layout_weight="0.4"
+                android:paddingEnd="16dp"
+                android:gravity="center_vertical" />
+            <EditText
+                android:id="@+id/evSpecies"
+                android:layout_width="0dp"
+                android:layout_weight="0.6"
+                android:inputType="textPersonName"
+                android:text="@string/wild_horse_pok_mon" />
+        </TableRow>
+
+        <!-- Gender -->
+        <TableRow android:layout_marginBottom="12dp">
+            <TextView
+                android:id="@+id/tvGender"
+                android:text="@string/gender"
+                android:layout_width="0dp"
+                android:layout_weight="0.4"
+                android:paddingEnd="16dp"
+                android:gravity="center_vertical" />
+            <RadioGroup
+                android:id="@+id/rgGender"
+                android:layout_width="0dp"
+                android:layout_weight="0.6"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/rbMale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/radioMale"
+                    android:layout_marginEnd="4dp" />
+                <RadioButton
+                    android:id="@+id/rbFemale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/radioFemale"
+                    android:layout_marginEnd="4dp" />
+                <RadioButton
+                    android:id="@+id/rbUnknown"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/radioUnknown" />
+            </RadioGroup>
+        </TableRow>
+
+        <!-- Height -->
+        <TableRow android:layout_marginBottom="12dp">
+            <TextView
+                android:id="@+id/tvHeight"
+                android:text="@string/height"
+                android:layout_width="0dp"
+                android:layout_weight="0.4"
+                android:paddingEnd="16dp"
+                android:gravity="center_vertical" />
+            <EditText
+                android:id="@+id/evHeight"
+                android:layout_width="0dp"
+                android:layout_weight="0.6"
+                android:inputType="numberDecimal"
+                android:text="@string/_2_2" />
+
+            <TextView
+                android:id="@+id/tvHeightUnit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="45dp"
+                android:text="@string/heightUnit"
+                android:textSize="16sp" />
+        </TableRow>
+
+        <!-- Weight -->
+        <TableRow android:layout_marginBottom="12dp">
+            <TextView
+                android:id="@+id/tvWeight"
+                android:text="@string/weight"
+                android:layout_width="0dp"
+                android:layout_weight="0.4"
+                android:paddingEnd="16dp"
+                android:gravity="center_vertical" />
+            <EditText
+                android:id="@+id/evWeight"
+                android:layout_width="0dp"
+                android:layout_weight="0.6"
+                android:inputType="numberDecimal"
+                android:text="@string/_800_0" />
+
+            <TextView
+                android:id="@+id/tvWeightUnit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="45dp"
+                android:text="@string/weightUnit"
+                android:textSize="16sp" />
+        </TableRow>
+
+        <!-- Level -->
+        <TableRow android:layout_marginBottom="20dp">
+            <TextView
+                android:id="@+id/tvLevel"
+                android:text="@string/level"
+                android:layout_width="0dp"
+                android:layout_weight="0.4"
+                android:paddingEnd="16dp"
+                android:gravity="center_vertical" />
+            <Spinner
+                android:id="@+id/sLevel"
+                android:layout_width="0dp"
+                android:layout_weight="0.6"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <!-- Base Stats Header -->
+        <TableRow android:layout_marginBottom="16dp">
+            <TextView
+                android:id="@+id/tvBaseStats"
+                android:layout_span="2"
+                android:text="@string/base_stats"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:gravity="start" />
+        </TableRow>
+
+        <!-- HP -->
+        <TableRow android:layout_marginBottom="12dp">
+            <TextView
+                android:id="@+id/tvHP"
+                android:text="@string/hp"
+                android:layout_width="0dp"
+                android:layout_weight="0.4"
+                android:paddingEnd="16dp"
+                android:gravity="center_vertical" />
+            <EditText
+                android:id="@+id/evHP"
+                android:layout_width="0dp"
+                android:layout_weight="0.6"
+                android:inputType="number"
+                android:text="@string/_0" />
+        </TableRow>
+
+        <!-- Attack -->
+        <TableRow android:layout_marginBottom="12dp">
+            <TextView
+                android:id="@+id/tvAttack"
+                android:text="@string/attack"
+                android:layout_width="0dp"
+                android:layout_weight="0.4"
+                android:paddingEnd="16dp"
+                android:gravity="center_vertical" />
+            <EditText
+                android:id="@+id/evAttack"
+                android:layout_width="0dp"
+                android:layout_weight="0.6"
+                android:inputType="number"
+                android:text="@string/_0" />
+        </TableRow>
+
+        <!-- Defense -->
+        <TableRow android:layout_marginBottom="24dp">
+            <TextView
+                android:id="@+id/tvDefense"
+                android:text="@string/defense"
+                android:layout_width="0dp"
+                android:layout_weight="0.4"
+                android:paddingEnd="16dp"
+                android:gravity="center_vertical" />
+            <EditText
+                android:id="@+id/evDefense"
+                android:layout_width="0dp"
+                android:layout_weight="0.6"
+                android:inputType="number"
+                android:text="@string/_0" />
+        </TableRow>
+
+        <!-- Buttons -->
+        <TableRow>
+            <Button
+                android:id="@+id/resetButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/reset"
+                android:layout_marginEnd="8dp" />
+            <Button
+                android:id="@+id/saveButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/save"
+                android:layout_marginStart="8dp" />
+        </TableRow>
+
+    </TableLayout>
+</ScrollView>

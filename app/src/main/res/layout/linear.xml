@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="32dp">
+
+        <!-- Header Section -->
+        <TextView
+            android:id="@+id/tvHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/header"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvSubheader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/subheader"
+            android:textSize="16sp"
+            android:layout_marginBottom="32dp" />
+
+        <!-- National Number -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/tvNationalNumber"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="@string/national_number"
+                android:layout_marginEnd="16dp" />
+            <EditText
+                android:id="@+id/evNationalNumber"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="number"
+                android:text="@string/_896" />
+        </LinearLayout>
+
+        <!-- Name -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="@string/name"
+                android:layout_marginEnd="16dp" />
+            <EditText
+                android:id="@+id/evName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="textPersonName"
+                android:text="@string/glastrier" />
+        </LinearLayout>
+
+        <!-- Species -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/tvSpecies"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="@string/species"
+                android:layout_marginEnd="16dp" />
+            <EditText
+                android:id="@+id/evSpecies"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="textPersonName"
+                android:text="@string/wild_horse_pok_mon" />
+        </LinearLayout>
+
+        <!-- Gender -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/tvGender"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="@string/gender"
+                android:layout_marginEnd="16dp" />
+            <RadioGroup
+                android:id="@+id/rgGender"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/rbMale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/radioMale"
+                    android:layout_marginEnd="8dp" />
+                <RadioButton
+                    android:id="@+id/rbFemale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/radioFemale"
+                    android:layout_marginEnd="8dp" />
+                <RadioButton
+                    android:id="@+id/rbUnknown"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/radioUnknown" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <!-- Height -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/tvHeight"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="@string/height"
+                android:layout_marginEnd="16dp" />
+            <EditText
+                android:id="@+id/evHeight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="numberDecimal"
+                android:text="@string/_2_2" />
+            <TextView
+                android:id="@+id/tvHeightUnit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="45dp"
+                android:text="@string/heightUnit"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <!-- Weight -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/tvWeight"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="@string/weight"
+                android:layout_marginEnd="16dp" />
+            <EditText
+                android:id="@+id/evWeight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="numberDecimal"
+                android:text="@string/_800_0" />
+
+            <TextView
+                android:id="@+id/tvWeightUnit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="45dp"
+                android:text="@string/weightUnit"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <!-- Level -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="24dp"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/tvLevel"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="@string/level"
+                android:layout_marginEnd="16dp" />
+            <Spinner
+                android:id="@+id/sLevel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <!-- Base Stats Header -->
+        <TextView
+            android:id="@+id/tvBaseStats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/base_stats"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp" />
+
+        <!-- HP -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/tvHP"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="@string/hp"
+                android:layout_marginEnd="16dp" />
+            <EditText
+                android:id="@+id/evHP"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="number"
+                android:text="@string/_0" />
+        </LinearLayout>
+
+        <!-- Attack -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/tvAttack"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="@string/attack"
+                android:layout_marginEnd="16dp" />
+            <EditText
+                android:id="@+id/evAttack"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="number"
+                android:text="@string/_0" />
+        </LinearLayout>
+
+        <!-- Defense -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="32dp"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/tvDefense"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="@string/defense"
+                android:layout_marginEnd="16dp" />
+            <EditText
+                android:id="@+id/evDefense"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="number"
+                android:text="@string/_0" />
+        </LinearLayout>
+
+        <!-- Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <Button
+                android:id="@+id/resetButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/reset"
+                android:layout_marginEnd="16dp" />
+            <Button
+                android:id="@+id/saveButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/save" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

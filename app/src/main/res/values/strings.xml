@@ -18,4 +18,12 @@
     <string name="radioUnknown">Unknown</string>
     <string name="reset">Reset</string>
     <string name="save">Save</string>
+    <string name="_896">896</string>
+    <string name="glastrier">Glastrier</string>
+    <string name="wild_horse_pok_mon">Wild Horse Pokémon</string>
+    <string name="_2_2">2.2</string>
+    <string name="_800_0">800.0</string>
+    <string name="_0">0</string>
+    <string name="heightUnit">m</string>
+    <string name="weightUnit">kg</string>
 </resources>

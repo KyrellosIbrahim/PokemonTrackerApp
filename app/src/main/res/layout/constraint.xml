@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".MainActivity">
 
     <TextView
@@ -152,6 +156,7 @@
         android:layout_marginTop="56dp"
         android:layout_marginEnd="45dp"
         android:ems="10"
+        android:text="@string/_896"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -165,6 +170,7 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="45dp"
         android:ems="10"
+        android:text="@string/glastrier"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -178,6 +184,7 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="45dp"
         android:ems="10"
+        android:text="@string/wild_horse_pok_mon"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -222,11 +229,23 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="45dp"
         android:ems="10"
+        android:text="@string/_2_2"
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rgGender" />
+
+    <TextView
+        android:id="@+id/tvHeightUnit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="45dp"
+        android:text="@string/heightUnit"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/evHeight"
+        app:layout_constraintBottom_toBottomOf="@+id/evHeight" />
 
     <EditText
         android:id="@+id/evWeight"
@@ -235,11 +254,23 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="45dp"
         android:ems="10"
+        android:text="@string/_800_0"
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/evHeight" />
+
+    <TextView
+        android:id="@+id/tvWeightUnit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="45dp"
+        android:text="@string/weightUnit"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/evWeight"
+        app:layout_constraintBottom_toBottomOf="@+id/evWeight" />
 
     <Spinner
         android:id="@+id/sLevel"
@@ -259,6 +290,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="45dp"
         android:ems="10"
+        android:text="@string/_0"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -272,6 +304,7 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="45dp"
         android:ems="10"
+        android:text="@string/_0"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -285,6 +318,7 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="45dp"
         android:ems="10"
+        android:text="@string/_0"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -317,3 +351,4 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
