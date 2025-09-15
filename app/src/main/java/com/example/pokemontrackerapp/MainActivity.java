@@ -3,6 +3,7 @@ package com.example.pokemontrackerapp;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputFilter;
+import android.text.TextUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +19,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private TextView tvNatNumber, tvName, tvSpecies, tvGender, tvHeight, tvWeight, tvLevel, tvHP, tvAttack, tvDefense;
@@ -31,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.table);
+        setContentView(R.layout.linear);
         // Initialize UI components
         tvNatNumber = findViewById(R.id.tvNationalNumber);
         tvName = findViewById(R.id.tvName);
@@ -120,77 +122,172 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void saveChecks() {
+        // list of error messages to display at the end
+        List<String> errors = new ArrayList<>();
+
+        // ---------- National Number ----------
         String natNumStr = nationalNumber.getText().toString().trim();
-        int natNum = Integer.parseInt(natNumStr);
-        if (natNumStr.isEmpty() || natNum < 1 || natNum > 1010) {
+        int natNum = -1;
+        if (natNumStr.isEmpty()) {
+            errors.add("National Number is required");
             tvNatNumber.setTextColor(Color.RED);
-            Toast.makeText(this, "National Number must be between 1 and 1010", Toast.LENGTH_SHORT).show();
-            return;
+        } else {
+            try {
+                natNum = Integer.parseInt(natNumStr);
+                if (natNum < 1 || natNum > 1010) {
+                    errors.add("National Number must be between 1 and 1010");
+                    tvNatNumber.setTextColor(Color.RED);
+                } else {
+                    tvNatNumber.setTextColor(Color.BLACK);
+                }
+            } catch (NumberFormatException e) {
+                errors.add("National Number must be a valid number");
+                tvNatNumber.setTextColor(Color.RED);
+            }
         }
-        else {
-            tvNatNumber.setTextColor(Color.BLACK);
-        }
+
+        // ---------- Name ----------
         String nameStr = name.getText().toString().trim();
         if (nameStr.isEmpty() || nameStr.length() < 3 || nameStr.length() > 12) {
+            errors.add("Name must be between 3 and 12 characters");
             tvName.setTextColor(Color.RED);
-            Toast.makeText(this, "Name is required and must be between 3 and 12 characters", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        else {
+        } else {
             tvName.setTextColor(Color.BLACK);
         }
-        if (genderGroup.getCheckedRadioButtonId() == -1) {
-            // Nothing selected
-            tvGender.setTextColor(Color.RED);
-            Toast.makeText(this, "Please select a gender", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        else {
-            tvGender.setTextColor(Color.BLACK);
-        }
-        int hpNum = Integer.parseInt(hp.getText().toString().trim());
-        if (hpNum < 1 || hpNum > 362) {
-            tvHP.setTextColor(Color.RED);
-            Toast.makeText(this, "HP must be between 1 and 362", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        else {
-            tvHP.setTextColor(Color.BLACK);
-        }
-        int attackNum = Integer.parseInt(attack.getText().toString().trim());
-        if (attackNum < 0 || attackNum > 526) {
-            tvAttack.setTextColor(Color.RED);
-            Toast.makeText(this, "Attack must be between 0 and 526", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        else {
-            tvAttack.setTextColor(Color.BLACK);
-        }
-        int defenseNum = Integer.parseInt(defense.getText().toString().trim());
-        if (defenseNum < 10 || defenseNum > 614) {
-            tvDefense.setTextColor(Color.RED);
-            Toast.makeText(this, "Defense must be between 10 and 614", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        else {
-            tvDefense.setTextColor(Color.BLACK);
-        }
-        double heightNum = Double.parseDouble(height.getText().toString().trim());
-        if (heightNum < 0.2 || heightNum > 169.99) {
-            tvHeight.setTextColor(Color.RED);
-            Toast.makeText(this, "Height must be between 0.2 and 169.99", Toast.LENGTH_SHORT).show();
-            return;
+
+        // ---------- Species ----------
+        String speciesStr = species.getText().toString().trim();
+        if (speciesStr.isEmpty() || speciesStr.length() < 3 || speciesStr.length() > 20) {
+            errors.add("Species must be between 3 and 20 characters");
+            tvSpecies.setTextColor(Color.RED);
         } else {
-            tvHeight.setTextColor(Color.BLACK);
+            tvSpecies.setTextColor(Color.BLACK);
         }
-        double weightNum = Double.parseDouble(weight.getText().toString().trim());
-        if (weightNum < 0.1 || weightNum > 992.97) {
+
+        // ---------- Gender ----------
+        int genderId = genderGroup.getCheckedRadioButtonId();
+        if (genderId == -1) {
+            errors.add("Please select a gender");
+            tvGender.setTextColor(Color.RED);
+        } else {
+            // optional stricter check (no Unknown):
+            if (genderId == R.id.rbUnknown) {
+                errors.add("Gender must be Male or Female");
+                tvGender.setTextColor(Color.RED);
+            } else {
+                tvGender.setTextColor(Color.BLACK);
+            }
+        }
+
+        // ---------- HP ----------
+        String hpStr = hp.getText().toString().trim();
+        if (hpStr.isEmpty()) {
+            errors.add("HP is required");
+            tvHP.setTextColor(Color.RED);
+        } else {
+            try {
+                int hpNum = Integer.parseInt(hpStr);
+                if (hpNum < 1 || hpNum > 362) {
+                    errors.add("HP must be between 1 and 362");
+                    tvHP.setTextColor(Color.RED);
+                } else {
+                    tvHP.setTextColor(Color.BLACK);
+                }
+            } catch (NumberFormatException e) {
+                errors.add("HP must be a valid number");
+                tvHP.setTextColor(Color.RED);
+            }
+        }
+
+        // ---------- Attack ----------
+        String attackStr = attack.getText().toString().trim();
+        if (attackStr.isEmpty()) {
+            errors.add("Attack is required");
+            tvAttack.setTextColor(Color.RED);
+        } else {
+            try {
+                int attackNum = Integer.parseInt(attackStr);
+                if (attackNum < 0 || attackNum > 526) {
+                    errors.add("Attack must be between 0 and 526");
+                    tvAttack.setTextColor(Color.RED);
+                } else {
+                    tvAttack.setTextColor(Color.BLACK);
+                }
+            } catch (NumberFormatException e) {
+                errors.add("Attack must be a valid number");
+                tvAttack.setTextColor(Color.RED);
+            }
+        }
+
+        // ---------- Defense ----------
+        String defenseStr = defense.getText().toString().trim();
+        if (defenseStr.isEmpty()) {
+            errors.add("Defense is required");
+            tvDefense.setTextColor(Color.RED);
+        } else {
+            try {
+                int defenseNum = Integer.parseInt(defenseStr);
+                if (defenseNum < 10 || defenseNum > 614) {
+                    errors.add("Defense must be between 10 and 614");
+                    tvDefense.setTextColor(Color.RED);
+                } else {
+                    tvDefense.setTextColor(Color.BLACK);
+                }
+            } catch (NumberFormatException e) {
+                errors.add("Defense must be a valid number");
+                tvDefense.setTextColor(Color.RED);
+            }
+        }
+
+        // ---------- Height ----------
+        String heightStr = height.getText().toString().trim();
+        if (heightStr.isEmpty()) {
+            errors.add("Height is required");
+            tvHeight.setTextColor(Color.RED);
+        } else {
+            try {
+                double heightNum = Double.parseDouble(heightStr);
+                if (heightNum < 0.2 || heightNum > 169.99) {
+                    errors.add("Height must be between 0.2 and 169.99");
+                    tvHeight.setTextColor(Color.RED);
+                } else {
+                    tvHeight.setTextColor(Color.BLACK);
+                }
+            } catch (NumberFormatException e) {
+                errors.add("Height must be a valid number");
+                tvHeight.setTextColor(Color.RED);
+            }
+        }
+
+        // ---------- Weight ----------
+        String weightStr = weight.getText().toString().trim();
+        if (weightStr.isEmpty()) {
+            errors.add("Weight is required");
             tvWeight.setTextColor(Color.RED);
-            Toast.makeText(this, "Weight must be between 0.1 and 992.97", Toast.LENGTH_SHORT).show();
+        } else {
+            try {
+                double weightNum = Double.parseDouble(weightStr);
+                if (weightNum < 0.1 || weightNum > 992.7) {
+                    errors.add("Weight must be between 0.1 and 992.7");
+                    tvWeight.setTextColor(Color.RED);
+                } else {
+                    tvWeight.setTextColor(Color.BLACK);
+                }
+            } catch (NumberFormatException e) {
+                errors.add("Weight must be a valid number");
+                tvWeight.setTextColor(Color.RED);
+            }
         }
-        else {
-            tvWeight.setTextColor(Color.BLACK);
+
+        // ---------- Final decision ----------
+        if (!errors.isEmpty()) {
+            // join all error messages into one toast
+            String message = TextUtils.join("\n", errors);
+            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        } else {
+            // all good
             Toast.makeText(this, "Pokémon successfully stored in the database.", Toast.LENGTH_SHORT).show();
         }
     }
+
 }
