@@ -2,6 +2,7 @@ package com.example.pokemontrackerapp;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputFilter;
@@ -29,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
     private Spinner level;
     private RadioGroup genderGroup;
 
-    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         level = findViewById(R.id.sLevel); // Spinner for level selection
         List<String> levels = new LinkedList<>();
         for (int i = 1; i <= 50; i++) {
-            levels.add(i+ "");
+            levels.add(i + "");
         }
         ArrayAdapter<String> levelAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, levels);
         levelAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         InputFilter nameFilter = (source, start, end, dest, dstart, dend) -> {
             for (int i = start; i < end; i++) {
                 char c = source.charAt(i);
-                if(!Character.isLetter(c) && c != ' ' && c != '.') { // only letters, spaces, and periods
+                if (!Character.isLetter(c) && c != ' ' && c != '.') { // only letters, spaces, and periods
                     return "";
                 }
             }
@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         InputFilter speciesFilter = (source, start, end, dest, dstart, dend) -> {
             for (int i = start; i < end; i++) {
                 char c = source.charAt(i);
-                if(!Character.isLetter(c) && c != ' ') { // only letters and space
+                if (!Character.isLetter(c) && c != ' ') { // only letters and space
                     return "";
                 }
             }
@@ -294,22 +294,44 @@ public class MainActivity extends AppCompatActivity {
             String message = TextUtils.join("\n", errors);
             Toast.makeText(this, message, Toast.LENGTH_LONG).show();
         } else {
-            // update database on submission
-            ContentValues values = new ContentValues();
-            values.put(PokemonProvider.COL_NATNUM, natNum);
-            values.put(PokemonProvider.COL_NAME, nameStr);
-            values.put(PokemonProvider.COL_SPECIES, speciesStr);
-            values.put(PokemonProvider.COL_GENDER, genderId == R.id.rbMale ? "Male" : "Female");
-            values.put(PokemonProvider.COL_HEIGHT, heightStr);
-            values.put(PokemonProvider.COL_WEIGHT, weightStr);
-            values.put(PokemonProvider.COL_LEVEL, level.getSelectedItem().toString());
-            values.put(PokemonProvider.COL_HP, hpStr);
-            values.put(PokemonProvider.COL_ATTACK, attackStr);
-            values.put(PokemonProvider.COL_DEFENSE, defenseStr);
-            getContentResolver().insert(PokemonProvider.CONTENT_URI, values);
+            // check for duplicate before adding
+            Cursor cursor = getContentResolver().query(
+                    PokemonProvider.CONTENT_URI,
+                    null,
+                    PokemonProvider.COL_NATNUM + " = ? AND " +
+                            PokemonProvider.COL_NAME + " = ? AND " +
+                            PokemonProvider.COL_SPECIES + " = ?",
+                    new String[]{
+                            String.valueOf(natNum),
+                            nameStr,
+                            speciesStr
+                    },
+                    null
+            );
 
-            Toast.makeText(this, "Pokémon successfully stored in the database.", Toast.LENGTH_SHORT).show();
+            if (cursor != null && cursor.getCount() > 0) { // duplicate found
+                cursor.close();
+                Toast.makeText(this, "This Pokemon entry already exists in the database.", Toast.LENGTH_LONG).show();
+            } else { // no duplicate found
+                if (cursor != null) cursor.close();
+
+                // update database on submission
+                ContentValues values = new ContentValues();
+                values.put(PokemonProvider.COL_NATNUM, natNum);
+                values.put(PokemonProvider.COL_NAME, nameStr);
+                values.put(PokemonProvider.COL_SPECIES, speciesStr);
+                values.put(PokemonProvider.COL_GENDER, genderId == R.id.rbMale ? "Male" : (genderId == R.id.rbUnknown ? "Unknown" : "Female"));
+                values.put(PokemonProvider.COL_HEIGHT, heightStr);
+                values.put(PokemonProvider.COL_WEIGHT, weightStr);
+                values.put(PokemonProvider.COL_LEVEL, level.getSelectedItem().toString());
+                values.put(PokemonProvider.COL_HP, hpStr);
+                values.put(PokemonProvider.COL_ATTACK, attackStr);
+                values.put(PokemonProvider.COL_DEFENSE, defenseStr);
+                getContentResolver().insert(PokemonProvider.CONTENT_URI, values);
+
+                Toast.makeText(this, "Pokemon successfully stored in the database.", Toast.LENGTH_SHORT).show();
+            }
         }
-    }
 
+    }
 }
