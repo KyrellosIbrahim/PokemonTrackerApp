@@ -28,4 +28,5 @@
     <string name="weightUnit">kg</string>
     <string name="my_pokedex">My Pokedex</string>
     <string name="view_collection">View Collection</string>
+    <string name="back">Back</string>
 </resources>
