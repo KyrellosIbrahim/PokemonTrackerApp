@@ -25,7 +25,8 @@ public class PokemonProvider extends ContentProvider {
     public static final String COL_DEFENSE = "Defense";
 
     public final static String SQL_CREATE_TABLE = "CREATE TABLE " + TABLENAME + " (" +
-            COL_NATNUM + " INTEGER PRIMARY KEY, " +
+            "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            COL_NATNUM + " INTEGER, " +
             COL_NAME + " TEXT, " +
             COL_SPECIES + " TEXT, " +
             COL_GENDER + " TEXT, " +
