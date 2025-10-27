@@ -26,4 +26,6 @@
     <string name="_0">0</string>
     <string name="heightUnit">m</string>
     <string name="weightUnit">kg</string>
+    <string name="my_pokedex">My Pokedex</string>
+    <string name="view_collection">View Collection</string>
 </resources>

@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PokemonTrackerApp">
         <activity
+            android:name=".pokemonList"
+            android:exported="false" />
+        <activity
             android:name=".row"
             android:exported="false" />
 

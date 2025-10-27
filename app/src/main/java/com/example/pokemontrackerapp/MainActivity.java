@@ -1,6 +1,7 @@
 package com.example.pokemontrackerapp;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputFilter;
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.linear);
+        setContentView(R.layout.constraint);
         // Initialize UI components
         tvNatNumber = findViewById(R.id.tvNationalNumber);
         tvName = findViewById(R.id.tvName);
@@ -96,6 +97,13 @@ public class MainActivity extends AppCompatActivity {
             return null;
         };
         species.setFilters(new InputFilter[]{speciesFilter, new InputFilter.LengthFilter(20)});
+
+        Button collectionButton = findViewById(R.id.viewCollectionButton);
+        collectionButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, row.class);
+            startActivity(intent);
+        });
+
 
         Button resetButton = findViewById(R.id.resetButton);
         resetButton.setOnClickListener(v -> resetFields());
