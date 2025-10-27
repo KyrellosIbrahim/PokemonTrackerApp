@@ -2,9 +2,15 @@ package com.example.pokemontrackerapp;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,12 +19,17 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class row extends AppCompatActivity {
+    SimpleCursorAdapter adapter;
+
     // special formatting for pokemon list appearance
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_row);
+
+        Button backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(v -> finish());
 
         ListView listView = findViewById(R.id.pokedexList);
 
@@ -31,6 +42,7 @@ public class row extends AppCompatActivity {
         );
 
         String[] columns = {
+                "_id",
                 PokemonProvider.COL_NATNUM,
                 PokemonProvider.COL_NAME,
                 PokemonProvider.COL_SPECIES,
@@ -43,6 +55,7 @@ public class row extends AppCompatActivity {
                 PokemonProvider.COL_DEFENSE,
         };
         int[] views = {
+                0,
                 R.id.tvRowNationalNumber,
                 R.id.tvRowName,
                 R.id.tvRowSpecies,
@@ -50,12 +63,13 @@ public class row extends AppCompatActivity {
                 R.id.tvRowStats,
                 R.id.tvRowLevel,
                 0,
+                0,
                 0
         };
 
-        SimpleCursorAdapter adapter = new SimpleCursorAdapter(
+        adapter = new SimpleCursorAdapter(
                 this,
-                R.layout.activity_row,
+                R.layout.activity_pokemon_list,
                 cursor,
                 columns,
                 views,
@@ -71,7 +85,8 @@ public class row extends AppCompatActivity {
             }
 
             if (viewId == R.id.tvRowLevel) {
-                String level = cursor1.getString(columnIndex);
+                int levelIndex = cursor1.getColumnIndex(PokemonProvider.COL_LEVEL);
+                String level = cursor1.getString(levelIndex);
                 ((TextView) view).setText(String.format("Lv. %s", level));
                 return true;
             }
@@ -94,10 +109,56 @@ public class row extends AppCompatActivity {
         });
 
         listView.setAdapter(adapter);
+        registerForContextMenu(listView);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        if (v.getId() == R.id.pokedexList) {
+            menu.setHeaderTitle("Options");
+            menu.add(0, 1, 0, "Delete");
+        }
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+       if(item.getItemId() == 1) {
+           AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+
+           Cursor cursor = (Cursor) adapter.getItem(info.position);
+
+           int idIndex = cursor.getColumnIndex("_id");
+           int id = cursor.getInt(idIndex);
+
+           int rowsDeleted = getContentResolver().delete(
+                   PokemonProvider.CONTENT_URI,
+                   "_id = ?",
+                   new String[]{String.valueOf(id)}
+           );
+
+           if(rowsDeleted > 0) {
+               Toast.makeText(this, "Pokemon deleted", Toast.LENGTH_SHORT).show();
+               // refresh the list
+               Cursor newCursor = getContentResolver().query(
+                       PokemonProvider.CONTENT_URI,
+                       null,
+                       null,
+                       null,
+                       PokemonProvider.COL_NATNUM + " ASC"
+               );
+               adapter.changeCursor(newCursor);
+           }
+           else {
+               Toast.makeText(this, "Failed to delete Pokemon", Toast.LENGTH_SHORT).show();
+           }
+           return true;
+       }
+       return super.onContextItemSelected(item);
     }
 }
