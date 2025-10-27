@@ -1,5 +1,6 @@
 package com.example.pokemontrackerapp;
 
+import android.content.ContentValues;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputFilter;
@@ -285,7 +286,20 @@ public class MainActivity extends AppCompatActivity {
             String message = TextUtils.join("\n", errors);
             Toast.makeText(this, message, Toast.LENGTH_LONG).show();
         } else {
-            // all good
+            // update database on submission
+            ContentValues values = new ContentValues();
+            values.put(PokemonProvider.COL_NATNUM, natNum);
+            values.put(PokemonProvider.COL_NAME, nameStr);
+            values.put(PokemonProvider.COL_SPECIES, speciesStr);
+            values.put(PokemonProvider.COL_GENDER, genderId == R.id.rbMale ? "Male" : "Female");
+            values.put(PokemonProvider.COL_HEIGHT, heightStr);
+            values.put(PokemonProvider.COL_WEIGHT, weightStr);
+            values.put(PokemonProvider.COL_LEVEL, level.getSelectedItem().toString());
+            values.put(PokemonProvider.COL_HP, hpStr);
+            values.put(PokemonProvider.COL_ATTACK, attackStr);
+            values.put(PokemonProvider.COL_DEFENSE, defenseStr);
+            getContentResolver().insert(PokemonProvider.CONTENT_URI, values);
+
             Toast.makeText(this, "Pokémon successfully stored in the database.", Toast.LENGTH_SHORT).show();
         }
     }
